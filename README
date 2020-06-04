@@ -1,0 +1,69 @@
+##The Problem
+
+Ubuntu 18.04 switched display managers -- from lightdm to gdm3 -- changing how user authentication and graphical logins are handled. Connecting remotely to a machine when the same user, or a different user, is logged in locally on that machine results in a black screen. This is likely due to a GUI session control lock and is commonly thought of as a bug.
+
+##A Solution
+
+This problem can be remedied by changing the display manager back to lightdm. While we're at it, let's also install x11vnc server.
+
+1. Install lightdm
+
+sudo apt-get install lightdm 
+
+2. Change the default display manager to lightdm
+
+sudo dpkg-reconfigure lightdm
+
+3. Check the default display manager
+
+cat /etc/X11/default-display-manager
+
+4. Remove the pre-installed display manager
+
+sudo apt-get remove gdm3
+
+5. Install x11vnc server
+
+sudo apt-get update -y
+sudo apt-get install x11vnc net-tools -y
+
+6. Create a password for x11vnc server
+
+x11vnc -storepasswd
+
+7. Create a systemd service file named x11vnc.service in /etc/systemd/system 
+
+sudo vi /etc/systemd/system/x11vnc.service
+
+8. Paste the following into your service file and save it (replace USERNAME with your own):
+
+[Unit]
+Description=VNC Server for X11
+Requires=display-manager.service
+
+[Service]
+ExecStart=/usr/bin/x11vnc -display :0 -auth guess -forever -loop -noxdamage -repeat -rfbauth /home/USERNAME/.vnc/passwd -rfbport 5900 -shared
+ExecStop=/usr/bin/killall x11vnc
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target
+
+9. Reload systemd
+
+sudo systemctl daemon-reload
+
+10. Enable x11vnc starting on boot
+
+sudo systemctl enable x11vnc
+
+11. Start the x11vnc service
+
+sudo systemctl start x11vnc
+
+12. Ensure that the service is active and running without errors
+
+sudo systemctl status x11vnc
+
+
