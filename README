@@ -69,4 +69,4 @@ sudo systemctl start x11vnc
 
 sudo systemctl status x11vnc
 
-
+13. Disable the machine's sleep and screen lock via the system settings menu.
