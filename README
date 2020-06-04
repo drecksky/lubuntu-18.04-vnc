@@ -26,8 +26,8 @@ sudo apt-get remove gdm3
 
 5. Install x11vnc server
 
-sudo apt-get update -y
-sudo apt-get install x11vnc net-tools -y
+sudo apt-get update
+sudo apt-get install x11vnc net-tools
 
 6. Create a password for x11vnc server
 
