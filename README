@@ -4,7 +4,7 @@ Ubuntu 18.04 switched display managers -- from lightdm to gdm3 -- changing how u
 
 A SOLUTION
 
-This problem can be remedied by changing the display manager back to lightdm. While we're at it, let's also install x11vnc server.
+The problem can be remedied by changing the display manager back to lightdm and, optionally, installing x11vnc.
 
 1. Install lightdm
 
