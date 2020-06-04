@@ -1,6 +1,8 @@
 THE PROBLEM
 
-Ubuntu 18.04 switched display managers -- from lightdm to gdm3 -- changing how user authentication and graphical logins are handled. Connecting remotely to a machine when the same user, or a different user, is logged in locally on that machine results in a black screen. This is likely due to a GUI session control lock and is commonly thought of as a bug.
+Ubuntu 18.04 switched display managers -- from lightdm to gdm3 -- changing how user authentication and graphical logins are 
+handled. Connecting remotely to a machine when the same user, or a different user, is logged in locally on that machine results 
+in a black screen. This is likely due to a GUI session control lock and is commonly thought of as a bug.
 
 A SOLUTION
 
